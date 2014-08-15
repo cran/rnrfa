@@ -1,0 +1,15 @@
+import(XML2R)
+import(RCurl)
+import(stringr)
+import(zoo)
+import(rjson)
+import(sp)
+import(rgdal)
+
+importFrom("utils", "packageDescription")
+
+export(GetStationSummary)
+export(OSG2LatLon)
+export(OSGParse)
+export(SearchNRFA)
+export(ToJSONarray)
