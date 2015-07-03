@@ -12,12 +12,12 @@
 #'
 #' @examples
 #' # One station
-#' SearchNRFA(3001)
+#' NRFA_TS(3001)
 #' # Multiple stations
-#' # SearchNRFA(c(3001,3002,3003)); plot(x[[1]]$data)
+#' # NRFA_TS(c(3001,3002,3003)); plot(x[[1]]$data)
 #'
 
-SearchNRFA <- function(ID){
+NRFA_TS <- function(ID){
 
   #require(RCurl)
   #require(XML2R)
@@ -32,7 +32,10 @@ SearchNRFA <- function(ID){
 
     counter <- counter + 1
 
-    url <- paste("http://www.ceh.ac.uk/nrfa/xml/waterml2?db=nrfa_public&stn=",stationID,"&dt=gdf",sep="")
+    website <- "http://nrfaapps.ceh.ac.uk/nrfa"
+
+    url <- paste(website,"/xml/waterml2?db=nrfa_public&stn=",
+                 stationID,"&dt=gdf",sep="")
 
     if ( url.exists(url)==TRUE ){
 
@@ -47,6 +50,10 @@ SearchNRFA <- function(ID){
 
       wml[[counter]] <- stationInfo
 
+      if (length(ID) == 1) wml <- wml[[1]]
+
+      return( wml )
+
     }else{
 
       message(paste("For station", stationID,"there is no available online dataset in waterml format"))
@@ -54,9 +61,5 @@ SearchNRFA <- function(ID){
     }
 
   }
-
-  if (length(ID) == 1) wml <- wml[[1]]
-
-  return( wml )
 
 }
