@@ -8,12 +8,11 @@
 #' @param metadataColumn name of column to filter
 #' @param entryValue string to search in metadataColumn#'
 #' @param minRec minimum number of recording years
+#' @param verbose if TRUE prints warning messages
 #'
 #' @details coordinates of bounding box are required in WGS84 (EPSG: 4326). If BB coordinates are missing, the function returns the list corresponding to the maximum extent of the network.
 #'
 #' @return data.frame with list of stations and related metadata
-#'
-#' @export
 #'
 #' @examples
 #' # Retrieve all the stations in the network (1537)
@@ -26,7 +25,7 @@
 #'
 
 NRFA_Catalogue <- function(bbox = NULL, metadataColumn = NULL,
-                           entryValue = NULL, minRec=NULL) {
+                           entryValue = NULL, minRec=NULL, verbose = FALSE) {
 
   # require(RCurl)
   # require(rjson)
@@ -53,12 +52,15 @@ NRFA_Catalogue <- function(bbox = NULL, metadataColumn = NULL,
 
   website <- "http://nrfaapps.ceh.ac.uk/nrfa"
 
-  url <- paste(website,"/json/stationSummary?db=nrfa_public&stn=llbb%3A",
-               latMax,"%2C",lonMin,"%2C",latMin,"%2C",lonMax, sep="")
+  url <- paste(website,"/json/stationSummary?db=nrfa_public&stn=llbb:",
+               latMax,",",lonMin,",",latMin,",",lonMax, sep="")
+
+  # url <- paste(website,"/json/stationSummary?db=nrfa_public&stn=llbb%3A",
+  #              latMax,"%2C",lonMin,"%2C",latMin,"%2C",lonMax, sep="")
 
   if( url.exists(url) ) {
 
-    message("Retrieving data from live web data source.")
+    if (verbose) message("Retrieving data from live web data source.")
 
     stationSummary <- fromJSON(file=url)
     if (length(as.list(stationSummary))==0){
@@ -109,14 +111,14 @@ NRFA_Catalogue <- function(bbox = NULL, metadataColumn = NULL,
 
             }else{
               threshold <- as.numeric(substr(entryValue, 2, nchar(entryValue)))
-              combinedString <- paste(metadataColumn,
+              combinedString <- paste("myColumn",
                                       substr(entryValue, 1, 1),
                                       substr(entryValue, 2, nchar(entryValue)))
               myExpression <- eval(parse(text=combinedString))
               newstationSummary <- subset(temp, myExpression)
             }
           }else{
-            myExpression <- eval(parse(text=metadataColumn))==entryValue
+            myExpression <- myColumn==entryValue
             newstationSummary <- subset(temp, myExpression)
           }
           stationSummary <- newstationSummary
