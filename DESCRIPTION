@@ -1,6 +1,6 @@
 Package: rnrfa
 Type: Package
-Version: 0.2.1
+Version: 0.3.0
 Title: UK National River Flow Archive Data from R
 Description: Utility functions to retrieve data from the UK National River Flow
     Archive. The package contains R wrappers to the UK NRFA data temporary-API.
@@ -17,5 +17,5 @@ License: GPL-3
 Repository: CRAN
 RoxygenNote: 5.0.0
 NeedsCompilation: no
-Packaged: 2015-11-14 16:31:26 UTC; claudia
-Date/Publication: 2015-11-15 10:09:08
+Packaged: 2015-11-19 17:15:58 UTC; claudia
+Date/Publication: 2015-11-20 11:52:50
