@@ -1,22 +1,19 @@
-#' This function retrieves metadata from wml time series of gauged daily flow from the NRFA database.
+#' This function retrieves data from wml time series of Catchment Monthly Rainfall from the NRFA database.
 #'
 #' @author Claudia Vitolo
 #'
-#' @description Given the station ID number(s), this function retrieves data (time series in zoo format) and metadata.
+#' @description Given the station ID number(s), this function retrieves data (time series in zoo format).
 #'
 #' @param ID station ID number(s), each number should be in the range [3002,236051].
 #'
-#' @return list composed of as many objects as in the list of station ID numbers. Each object can be accessed using their names or index (e.g. x[[1]], x[[2]], and so forth). Each object contains a data.frame.
+#' @return list composed of as many objects as in the list of station ID numbers. Each object can be accessed using their names or index (e.g. x[[1]], x[[2]], and so forth). Each object contains a zoo time series.
 #'
 #' @examples
-#' # One station
-#' CMRmeta(18019)
-#'
 #' # Multiple stations
-#' # x <- CMRmeta(c(3001,3002,3003))
+#' # x <- CMRmulti(c(3001,3002,3003))
 #'
 
-CMRmeta <- function(ID){
+CMRmulti <- function(ID){
 
   # require(RCurl)
   # require(XML2R)
@@ -44,7 +41,7 @@ CMRmeta <- function(ID){
       nodes <- docsToNodes(doc,xpath="/")
       myList <- nodesToList(nodes)
 
-      wml[[counter]] <- FindInfo(myList)
+      wml[[counter]] <- FindTS(myList)
 
       if (length(ID) == 1) {
 

@@ -1,6 +1,6 @@
 #' rnrfa: UK NRFA data from R.
 #'
-#' This is an R wrapper to the UK NRFA data API at http://... There are functions to retrieve stations falling in a bounding box, to generate a map and extracting time series and general information. It also contain the dataset \code{StationSummary}.
+#' This is an R wrapper to the UK NRFA web services and data API (see http://nrfa.ceh.ac.uk/). There are functions to retrieve a list of stations based on various criteria (e.g. geographical bounding box) and extracting time series of gauged daily flows and catchment mean rainfall as well as metadata. It also contain the dataset \code{StationSummary}.
 #'
 #' @version 0.1.0
 #' @name rnrfa-package
@@ -12,7 +12,7 @@
 
 #' StationSummary dataset.
 #'
-#' This dataset contains all the NRFA stations.
+#' This dataset contains all the NRFA stations (latest update: February 2016).
 #'
 #' @name StationSummary
 #' @aliases StationSummary
@@ -22,7 +22,7 @@
 #' @usage data(StationSummary)
 #'
 #' @format{
-#' A data frame with 1537 observations on the following 20 variables.
+#' A data frame with 1539 gauging stations and the following 20 variables.
 #' @describe{
 #' \item{\code{id}}{a list vector}
 #' \item{\code{name}}{a list vector}
@@ -42,8 +42,8 @@
 #' \item{\code{categories}}{a list vector}
 #' \item{\code{altitude}}{a list vector}
 #' \item{\code{sensitivity}}{a list vector}
-#' \item{\code{Latitude}}{a numeric vector}
-#' \item{\code{Longitude}}{a numeric vector}
+#' \item{\code{lat}}{a numeric vector of latitude coordinates}
+#' \item{\code{lon}}{a numeric vector of longitude coordinates}
 #' }
 #' }
 #' @details This is the full set of river station that can be retrieved using UK NRFA APIs.

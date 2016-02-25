@@ -17,11 +17,7 @@ Given the station ID number(s), this function retrieves data (time series in zoo
 }
 \examples{
 # One station
-GDF(3001)
-# Multiple stations
-# x <- GDF(c(3001,3002,3003))
-# plot(x$ID3001)
-# plot(x[[1]])
+GDF(18019)
 
 }
 \author{
