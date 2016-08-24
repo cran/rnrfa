@@ -10,9 +10,13 @@
 #'
 #' @return list composed of as many objects as in the list of station ID numbers. Each object can be accessed using their names or index (e.g. x[[1]], x[[2]], and so forth). Each object contains a zoo time series.
 #'
+#' @export
+#'
 #' @examples
-#' GDF(18019)
-#' # GDF(c(54022,54090,54091))
+#' \dontrun{
+#'   GDF(18019)
+#'   GDF(c(54022,54090,54091))
+#' }
 #'
 
 GDF <- function(id, metadata = FALSE, parallel = FALSE){

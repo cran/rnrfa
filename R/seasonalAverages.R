@@ -10,9 +10,14 @@
 #'
 #' @return A vector containing the seasonal average and significance level (p-value) for each time series.
 #'
+#' @export
+#'
 #' @examples
-#' # seasonalAverages(CMR(18019), season = "Spring")
-#' # seasonalAverages(list(CMR(18019), CMR(18019)), season = "Spring")
+#' \dontrun{
+#'   seasonalAverages(CMR(18019), season = "Spring")
+#'   seasonalAverages(list(CMR(18019), CMR(18019)), season = "Spring")
+#' }
+#'
 
 seasonalAverages <- function(timeseries, season = "Spring",
                              startSeason = NULL, endSeason = NULL,
@@ -71,7 +76,7 @@ seasonalAverages_internal <- function(timeseries, season = "Spring",
   }
 
   meanAnnualSpring <- c()
-  for (myyear in unique(.indexyear(timeseries) + 1900)){
+  for (myyear in unique(xts::.indexyear(timeseries) + 1900)){
     myInterval <- paste(myyear, "-", startSeason, "::",
                         myyear, "-", endSeason, sep="")
     meanAnnualSpring <- c(meanAnnualSpring,
@@ -79,7 +84,7 @@ seasonalAverages_internal <- function(timeseries, season = "Spring",
   }
 
   # basic straight line of fit
-  fit <- glm(meanAnnualSpring~seq(1, length(meanAnnualSpring)))
+  fit <- stats::glm(meanAnnualSpring~seq(1, length(meanAnnualSpring)))
   # F-statistics of the significance test with the summary function
   # extract slope and p-value (for significance to be true, p should be < 0.05)
   co <- summary(fit)$coefficients[2,c(1,4)] # only slope: coef(fit)[[2]]

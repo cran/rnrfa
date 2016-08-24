@@ -7,8 +7,13 @@
 #'
 #' @return Flow time series in mm/d
 #'
+#' @export
+#'
 #' @examples
-#' #' # convertFlow(30, 2)
+#' \dontrun{
+#'   convertFlow(30, 2)
+#' }
+#'
 
 convertFlow <- function(flowCumecs, catchmentArea){
 
