@@ -36,10 +36,6 @@
 catalogue <- function(bbox = NULL, columnName = NULL, columnValue = NULL,
                       minRec=NULL, all = TRUE) {
 
-  # require(RCurl)
-  # require(rjson)
-  # require(plyr)
-
   options(warn=-1)
 
   ### FILTER BASED ON BOUNDING BOX ###
@@ -60,15 +56,17 @@ catalogue <- function(bbox = NULL, columnName = NULL, columnValue = NULL,
 
   }
 
-  website <- "http://nrfaapps.ceh.ac.uk/nrfa"
+  myBBOX <- paste0(latMax, ",", lonMin, ",", latMin, ",", lonMax)
 
-  url <- paste(website,"/json/stationSummary?db=nrfa_public&stn=llbb:",
-               latMax,",",lonMin,",",latMin,",",lonMax, sep="")
+  site_fetch <- httr::GET(url = "http://nrfaapps.ceh.ac.uk/",
+                          path = "nrfa/json/stationSummary",
+                          query = list(db = "nrfa_public",
+                                       stn = paste0("llbb:", myBBOX)))
 
-  if( RCurl::url.exists(url) ) {
+  if( !httr::http_error(site_fetch) ) {
 
     # Get the JSON file
-    stationListJSON <- rjson::fromJSON(file=url)
+    stationListJSON <- rjson::fromJSON(file = site_fetch[[1]])
     # remove nested lists
     stationList <- plyr::llply(stationListJSON, unlist)
 
@@ -79,15 +77,16 @@ catalogue <- function(bbox = NULL, columnName = NULL, columnValue = NULL,
     }else{
 
       stationColumns <- unique(unlist(lapply(stationListJSON, names)))
-      cols2rm <- which(stationColumns %in% c("description", "start", "end",
-                                             "primary-purpose",
-                                             "measured-parameter",
-                                             "how-parameter-measured",
-                                             "high-flow-gauging-method",
-                                             "previous-high-flow-gauging-method",
-                                             "wing-wall-height", "bankfull-stage",
-                                             "maximum-gauged-flow",
-                                             "maximum-gauged-level"))
+      cols2rm <- which(stationColumns %in%
+                         c("description", "start", "end",
+                           "primary-purpose",
+                           "measured-parameter",
+                           "how-parameter-measured",
+                           "high-flow-gauging-method",
+                           "previous-high-flow-gauging-method",
+                           "wing-wall-height", "bankfull-stage",
+                           "maximum-gauged-flow",
+                           "maximum-gauged-level"))
       stationColumns <- unique(unlist(lapply(stationListJSON, names)))[-cols2rm]
       selectedMeta <- lapply(stationList, function(x) {x[stationColumns]})
       stationList <- as.data.frame(do.call(rbind,selectedMeta))
@@ -129,10 +128,12 @@ catalogue <- function(bbox = NULL, columnName = NULL, columnValue = NULL,
             if (substr(columnValue, 2, 2) == "="){
 
               threshold <- as.numeric(as.character(substr(columnValue,
-                                                          3, nchar(columnValue))))
+                                                          3,
+                                                          nchar(columnValue))))
               combinedString <- paste(columnName,
                                       substr(columnValue, 1, 2),
-                                      substr(columnValue, 3, nchar(columnValue)))
+                                      substr(columnValue, 3,
+                                             nchar(columnValue)))
               myExpression <- eval(parse(text=combinedString))
               newstationList <- subset(temp, myExpression)
 
@@ -141,7 +142,8 @@ catalogue <- function(bbox = NULL, columnName = NULL, columnValue = NULL,
                                                           nchar(columnValue))))
               combinedString <- paste("myColumn",
                                       substr(columnValue, 1, 1),
-                                      substr(columnValue, 2, nchar(columnValue)))
+                                      substr(columnValue, 2,
+                                             nchar(columnValue)))
               myExpression <- eval(parse(text=combinedString))
               newstationList <- subset(temp, myExpression)
             }
@@ -175,7 +177,7 @@ catalogue <- function(bbox = NULL, columnName = NULL, columnValue = NULL,
       if (nrow(stationList) > 0) {
 
         # Add lat and lon
-        gridR <- OSGparse(gridRefs = unlist(stationList$gridReference),
+        gridR <- osg_parse(gridRefs = unlist(stationList$gridReference),
                           CoordSystem = "WGS84")
         stationList$lat <- gridR$lat
         stationList$lon <- gridR$lon

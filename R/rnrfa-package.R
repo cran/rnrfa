@@ -7,19 +7,22 @@
 #' @title UK National River Flow Archive data from R
 #'
 #' @importFrom utils packageDescription
+#' @importFrom stats quantile
 #' @importFrom cowplot plot_grid
 #' @importFrom plyr llply
 #' @importFrom graphics axis legend mtext par plot
 #' @importFrom stats glm
-#' @importFrom RCurl url.exists
-#' @importFrom XML2R urlsToDocs docsToNodes nodesToList
+#' @importFrom httr GET http_error
+#' @importFrom xml2 read_xml
 #' @importFrom stringr str_sub
 #' @importFrom xts xts .indexyear plot.xts
 #' @importFrom rjson fromJSON
 #' @importFrom ggmap ggmap get_map
 #' @importFrom ggplot2 ggplot geom_point aes coord_flip scale_color_manual theme geom_boxplot theme_minimal ylab xlab unit element_text margin
 #' @importFrom sp coordinates proj4string CRS spTransform
+#' @importFrom parallel parLapply
 #'
+NULL
 
 #' StationSummary dataset.
 #'

@@ -2,7 +2,7 @@
 #'
 #' @description This function plots a previously calculated trend.
 #'
-#' @param df Data frame containing at least 4 column: lat (latitude), lon (longitude), Slope and an additonal user-defined column \code{columnName}.
+#' @param df Data frame containing at least 4 column: lat (latitude), lon (longitude), Slope and an additional user-defined column \code{columnName}.
 #' @param columnName name of the column to use for grouping the results.
 #'
 #' @return Two plots, side-by-side, the first showing the distribution of the Trend over a map, based on the slope of the linear model that describes the trend. The second plot shows a boxplot of the Slope grouped based on the column Region. Region and Slope can be user-defined.
@@ -11,10 +11,10 @@
 #'
 #' @examples
 #' \dontrun{
-#'   plotTrend(df, Region)
+#'   plot_trend(df, Region)
 #' }
 
-plotTrend <- function(df, columnName){
+plot_trend <- function(df, columnName){
 
   # A colorblind-friendly palette
   cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
@@ -45,7 +45,9 @@ plotTrend <- function(df, columnName){
                            ggplot2::aes(x = eval(parse(text=columnName)),
                                         y = Slope,
                                         group = eval(parse(text=columnName)))) +
-    ggplot2::geom_boxplot() +
+    ggplot2::geom_boxplot(outlier.shape = NA) +
+    ggplot2::scale_y_continuous(limits = stats::quantile(df$Slope,
+                                                         c(0.05, 0.95))) +
     ggplot2::theme_minimal() + ggplot2::ylab("Slope") + ggplot2::xlab("") +
     ggplot2::coord_flip() +
     ggplot2::theme(plot.margin=ggplot2::unit(c(1,1,1,1.2),"cm"),
