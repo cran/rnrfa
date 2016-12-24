@@ -1,14 +1,12 @@
 #' rnrfa: UK National River Flow Archive Data from R.
 #'
-#' Utility functions to retrieve data from the UK National River Flow Archive. The package contains R wrappers to the UK NRFA data temporary-API. There are functions to retrieve stations falling in a bounding box, to generate a map and extracting time series and general information.
+#' Utility functions to retrieve data from the UK National River Flow Archive (http://nrfa.ceh.ac.uk/). The package contains R wrappers to the UK NRFA data temporary-API. There are functions to retrieve stations falling in a bounding box, to generate a map and extracting time series and general information.
 #'
 #' @name rnrfa-package
 #' @docType package
 #' @title UK National River Flow Archive data from R
 #'
-#' @importFrom utils packageDescription
 #' @importFrom stats quantile
-#' @importFrom cowplot plot_grid
 #' @importFrom plyr llply
 #' @importFrom graphics axis legend mtext par plot
 #' @importFrom stats glm
@@ -18,7 +16,7 @@
 #' @importFrom xts xts .indexyear plot.xts
 #' @importFrom rjson fromJSON
 #' @importFrom ggmap ggmap get_map
-#' @importFrom ggplot2 ggplot geom_point aes coord_flip scale_color_manual theme geom_boxplot theme_minimal ylab xlab unit element_text margin
+#' @importFrom ggplot2 ggplot geom_point aes coord_flip scale_color_manual theme geom_boxplot theme_minimal ylab xlab unit element_text margin ggtitle
 #' @importFrom sp coordinates proj4string CRS spTransform
 #' @importFrom parallel parLapply
 #'
