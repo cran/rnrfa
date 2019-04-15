@@ -7,31 +7,58 @@
 get_ts(id, type, metadata = FALSE, cl = NULL, verbose = FALSE)
 }
 \arguments{
-\item{id}{station identification number(s), each number should be in the range [3002,236051].}
+\item{id}{station identification number(s), each number should be in the
+range [3002,236051].}
 
-\item{type}{This is character string that can have one of the two following values: "cmr" (to obtain catchment mean rainfall) or "gdf" (to obtain gauged daily flow).}
+\item{type}{The following data-types are available:
+\itemize{
+  \item gdf = Gauged daily flows
+  \item gmf = Gauged monthly flows
+  \item ndf = Naturalised daily flows
+  \item nmf = Naturalised monthly flows
+  \item cdr = Catchment daily rainfall
+  \item cdr-d = Catchment daily rainfall distance to rain gauge
+  \item cmr = Catchment monthly rainfall
+  \item pot-stage = Peaks over threshold stage
+  \item pot-flow = Peaks over threshold flow
+  \item gauging-stage = Gauging stage
+  \item gauging-flow = Gauging flow
+  \item amax-stage = Annual maxima stage
+  \item amax-flow = Annual maxima flow
+}}
 
-\item{metadata}{Logical, FALSE by default. If metadata = TRUE means that the result for a single station is a list with two elements: data (the time series) and meta (metadata).}
+\item{metadata}{Logical, FALSE by default. If metadata = TRUE means that the
+result for a single station is a list with two elements: data (the time
+series) and meta (metadata).}
 
-\item{cl}{(optional) This is a cluster object, created by the parallel package. This is set to NULL by default, which sends sequential calls to the server.}
+\item{cl}{(optional) This is a cluster object, created by the parallel
+package. This is set to NULL by default, which sends sequential calls to the
+server.}
 
-\item{verbose}{(FALSE by default). If set to TRUE prints GET request on the console.}
+\item{verbose}{(FALSE by default). If set to TRUE prints GET request on the
+console.}
 }
 \value{
-list composed of as many objects as in the list of station identification numbers. Each object can be accessed using their names or index (e.g. x[[1]], x[[2]], and so forth). Each object contains a zoo time series.
+list composed of as many objects as in the list of station
+identification numbers. Each object can be accessed using their names or
+index (e.g. x[[1]], x[[2]], and so forth). Each object contains a zoo time
+series.
 }
 \description{
-Given the station identification number(s), this function retrieves data (time series in zoo format with accompanying metadata) from the WaterML2 service on the NRFA database. The time series can be of two types: \code{cmr} (catchment mean rainfall, monthly) or \code{gdf} (gauged daily flows, daily).
+Given the station identification number(s), this function
+retrieves data (time series in zoo format with accompanying metadata) from
+the WaterML2 service on the NRFA database. The time series can be of two
+types: \code{cmr} (catchment mean rainfall, monthly) or \code{gdf}
+(gauged daily flows, daily).
 }
 \examples{
 \dontrun{
   get_ts(18019, type = "cmr")
-
   get_ts(c(54022,54090,54091), type = "cmr")
-
   get_ts(18019, type = "gdf")
-
   get_ts(c(54022,54090,54091), type = "gdf")
+  plot(get_ts(id = 23001, type = "ndf"))
+  plot(get_ts(id = 23001, type = "nmf"))
 }
 
 }

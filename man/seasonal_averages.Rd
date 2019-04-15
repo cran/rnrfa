@@ -4,30 +4,34 @@
 \alias{seasonal_averages}
 \title{Calculate seasonal averages}
 \usage{
-seasonal_averages(timeseries, season = "Spring", startSeason = NULL,
-  endSeason = NULL, parallel = FALSE)
+seasonal_averages(timeseries, season = "Spring", startseason = NULL,
+  endseason = NULL, parallel = FALSE)
 }
 \arguments{
 \item{timeseries}{Time series (xts class).}
 
 \item{season}{Name of the season (Autumn, Winter, Spring, Summer)}
 
-\item{startSeason}{String encoding the start of the season (e.g. for spring in the northen hemisphere this is "03-21")}
+\item{startseason}{String encoding the start of the season (e.g. for spring
+in the northen hemisphere this is "03-21")}
 
-\item{endSeason}{String encoding the end of the season (e.g. for spring in the northen emisphere this is "06-20")}
+\item{endseason}{String encoding the end of the season (e.g. for spring in
+the northen emisphere this is "06-20")}
 
-\item{parallel}{Logical, FALSE by default. If parallel = TRUE means that the function can be used in parallel computations.}
+\item{parallel}{Logical, FALSE by default. If parallel = TRUE means that the
+function can be used in parallel computations.}
 }
 \value{
-A vector containing the seasonal average and significance level (p-value) for each time series.
+A vector containing the seasonal average and significance level
+(p-value) for each time series.
 }
 \description{
 This calculates the seasonal averages from a time series.
 }
 \examples{
 \dontrun{
-  seasonal_averages(CMR(18019), season = "Spring")
-  seasonal_averages(list(CMR(18019), CMR(18019)), season = "Spring")
+  seasonal_averages(timeseries = cmr(18019), season = "Spring")
+  seasonal_averages(list(cmr(18019), cmr(18019)), season = "Spring")
 }
 
 }
