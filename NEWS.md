@@ -1,3 +1,11 @@
+v2.0.1 and submitted to CRAN.
+--------------------------------------
+
+Major changes:
+
+1. Removed obsolete tests that were checking against proj4-based pre-calculated values. This is to overcome issue with use of proj6.
+
+
 Updated to v2.0 and submitted to CRAN.
 --------------------------------------
 
@@ -5,6 +13,9 @@ Major changes:
 
 1. Developed new function to interface new API 
 2. Updated existing functions to work with the new API
+
+Minor changes:
+1. Fixed broken URL in README file
 
 
 Updated to v1.5 and submitted to CRAN.
