@@ -1,40 +1,40 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  install.packages(c("cowplot", "httr", "xts", "ggmap", "ggplot2", "sp", "rgdal", "parallel", "tibble"))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  packs <- c("devtools", "DT", "leaflet")
 #  install.packages(packs)
 #  lapply(packs, require, character.only = TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  install.packages("rnrfa")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  devtools::install_github("cvitolo/rnrfa")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  library(rnrfa)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  # Retrieve station identifiers:
 #  allIDs <- station_ids()
 #  head(allIDs)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  # Retrieve information for all the stations in the catalogue:
 #  allStations <- catalogue()
 #  head(allStations)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  # Define a bounding box:
 #  bbox <- list(lon_min = -3.82, lon_max = -3.63, lat_min = 52.43, lat_max = 52.52)
 #  # Filter stations based on bounding box
 #  catalogue(bbox)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  # Filter based on minimum recording years
 #  catalogue(min_rec = 100)
 #  
@@ -55,28 +55,28 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 #  # Filter stations based on identification number
 #  catalogue(column_name="id", column_value=c(3001,3002,3003))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  # Other combined filtering
 #  someStations <- catalogue(bbox,
 #                            column_name = "id",
 #                            column_value = c(54022,54090,54091,54092,54097),
 #                            min_rec = 35)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  # Where is the first catchment located?
 #  someStations$`grid-reference`$ngr[1]
 #  
 #  # Convert OS Grid reference to BNG
 #  osg_parse("SN853872")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  # Convert BNG to WSGS84
 #  osg_parse(grid_refs = "SN853872", coord_system = "WGS84")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  osg_parse(grid_refs = someStations$`grid-reference`$ngr)
 
-## ---- fig.width=7--------------------------------------------------------
+## ---- fig.width=7-------------------------------------------------------------
 #  # Fetch only time series data from the waterml2 service
 #  info <- cmr(id = "3001")
 #  plot(info)
@@ -87,7 +87,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 #                             info$meta$stationName,"catchment"),
 #       xlab="", ylab=info$meta$units)
 
-## ---- fig.width=7--------------------------------------------------------
+## ---- fig.width=7-------------------------------------------------------------
 #  # Fetch only time series data
 #  info <- gdf(id = "3001")
 #  plot(info)
@@ -99,7 +99,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 #                              " catchment (",
 #                              info$meta$data.type.units, ")"))
 
-## ---- fig.width=7--------------------------------------------------------
+## ---- fig.width=7-------------------------------------------------------------
 #  # Search data/metadata
 #  s <- cmr(c(3002,3003), metadata = TRUE)
 #  
@@ -108,21 +108,21 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 #       main = paste(s[[1]]$meta$station.name, "and", s[[2]]$meta$station.name))
 #  lines(s[[2]]$data, col="green")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  library(DT)
 #  datatable(catalogue())
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  library(leaflet)
 #  
 #  leaflet(data = someStations) %>% addTiles() %>%
 #    addMarkers(~longitude, ~latitude, popup = ~as.character(paste(id,name)))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  library(dygraphs)
 #  dygraph(info$data) %>% dyRangeSelector()
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  library(parallel)
 #  # Use detectCores() to find out many cores are available on your machine
 #  cl <- makeCluster(getOption("cl.cores", detectCores()))
@@ -138,7 +138,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 #  
 #  stopCluster(cl)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #  # Calculate the mean flow for each catchment
 #  someStations$meangdf <- unlist(lapply(s2, mean))
 #  
