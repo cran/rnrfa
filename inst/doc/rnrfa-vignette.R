@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 #  install.packages("rnrfa")
 
 ## -----------------------------------------------------------------------------
-#  devtools::install_github("cvitolo/rnrfa")
+#  devtools::install_github("ilapros/rnrfa")
 
 ## -----------------------------------------------------------------------------
 #  library(rnrfa)

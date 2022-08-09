@@ -1,3 +1,16 @@
+v2.0.6 and submitted to CRAN
+--------------------------------------
+Major changes: 
+
+- Change of maintainer for CRAN package 
+- The hard dependency on the rgdal package is dropped (this is in light of the announced retirement of rgdal in 2023). In the process the hard dependence to sp has been dropped in favour of sf, to avoid possible issues down the line when sp goes through the changes necessary to accommodate the rgdal retirement. The package still depends on sp via ggmap -> RgoogleMaps. 
+
+Minor changes:
+
+1. To further ensure that the package fails gracefully when the NRFA api is interrogated about stations which do not exist an informative message is printed and the function(s) return a NULL object.  
+2. Thanks to Andrew Duncan (@aj2duncan) osg_parse now outputs a missing value if a missing coordinate is given 
+3. small fixes in documentation. 
+
 v2.0.4 and submitted to CRAN.
 --------------------------------------
 Minor change:

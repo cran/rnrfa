@@ -1,10 +1,14 @@
 Package: rnrfa
 Title: UK National River Flow Archive Data from R
-Version: 2.0.4
-Authors@R: c(person("Claudia", "Vitolo",
-                    email = "cvitolodev@gmail.com",
-                    role = c("aut", "cre"),
-                    comment = c(ORCID = "0000-0002-4252-1176")),
+Version: 2.0.6
+Authors@R: c(person("Ilaria", "Prosdocimi", 
+                    email = "prosdocimi.ilaria@gmail.com",
+                    role = c("ctb", "cre"),
+                    comment = c(ORCID = "0000-0001-8565-094X")),
+             person("Claudia", "Vitolo",
+                    comment = c(ORCID = "0000-0002-4252-1176",
+                    "Claudia is the original creator of the package"), 
+                    role = c("aut")),
              person("Matthew", "Fry", role = c("ctb"),
                     comment = "Matthew supervised the unofficial API 
                     integration."),
@@ -16,13 +20,11 @@ Authors@R: c(person("Claudia", "Vitolo",
                     with grid references of different lengths."),
              person("Tobias", "Gauster", role = c("ctb"),
                     comment = "Tobias improved the function osg_parse 
-                    introducing vectorisation"),
-             person("Ilaria", "Prosdocimi", role = c("ctb"),
-                    comment = "Ilaria contributed to the adaptation of the
-                    package to the 2019 API"))
-Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
-URL: http://cvitolo.github.io/rnrfa/
-BugReports: https://github.com/cvitolo/rnrfa/issues
+                    introducing vectorisation")
+                    )
+Maintainer: Ilaria Prosdocimi <prosdocimi.ilaria@gmail.com>
+URL: https://ilapros.github.io/rnrfa/
+BugReports: https://github.com/ilapros/rnrfa/issues
 Description: Utility functions to retrieve data from the UK National River Flow
   Archive (<https://nrfa.ceh.ac.uk/>, terms and conditions:
   <https://nrfa.ceh.ac.uk/costs-terms-and-conditions>).
@@ -33,25 +35,24 @@ Description: Utility functions to retrieve data from the UK National River Flow
   Visualize Data from the UK National River Flow Archive"
   <https://journal.r-project.org/archive/2016/RJ-2016-036/RJ-2016-036.pdf>.
 Depends: R (>= 3.5)
-Imports: rgdal, curl, jsonlite, lubridate, graphics, stats, httr, zoo,
-        ggmap, ggplot2, sp, parallel, tibble
+Imports: curl, jsonlite, lubridate, graphics, stats, httr, zoo, ggmap,
+        ggplot2, sf, parallel, tibble
 Suggests: testthat, knitr, covr, lintr, rmarkdown
-LazyData: true
 Encoding: UTF-8
 License: GPL-3
 Repository: CRAN
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-02-15 09:42:32 UTC; claudia
-Author: Claudia Vitolo [aut, cre] (<https://orcid.org/0000-0002-4252-1176>),
+Packaged: 2022-08-09 10:59:23 UTC; ilari
+Author: Ilaria Prosdocimi [ctb, cre] (<https://orcid.org/0000-0001-8565-094X>),
+  Claudia Vitolo [aut] (<https://orcid.org/0000-0002-4252-1176>, Claudia
+    is the original creator of the package),
   Matthew Fry [ctb] (Matthew supervised the unofficial API integration.),
   Wouter Buytaert [ctb] (This package is part of Claudia Vitolo's PhD
     work and Wouter is the supervisor.),
   Michael Spencer [ctb] (Michael updated the function osg_parse to work
     with grid references of different lengths.),
   Tobias Gauster [ctb] (Tobias improved the function osg_parse
-    introducing vectorisation),
-  Ilaria Prosdocimi [ctb] (Ilaria contributed to the adaptation of the
-    package to the 2019 API)
-Date/Publication: 2021-02-15 15:20:02 UTC
+    introducing vectorisation)
+Date/Publication: 2022-08-09 14:20:02 UTC
