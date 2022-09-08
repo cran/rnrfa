@@ -1,3 +1,11 @@
+v2.1.0 and submitted to CRAN
+--------------------------------------
+Minor changes: 
+
+- Changes in test. some changes must have occurred in the NRFA dataset 
+- Bumped version - should have done this the previous time
+
+
 v2.0.6 and submitted to CRAN
 --------------------------------------
 Major changes: 
