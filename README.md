@@ -6,9 +6,8 @@
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/rnrfa)](https://cran.r-project.org/package=rnrfa)
 [![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rnrfa)](https://cran.r-project.org/package=rnrfa)
 [![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/rnrfa)](https://cran.r-project.org/package=rnrfa)
-
 [![R-CMD-check](https://github.com/ilapros/rnrfa/workflows/R-CMD-check/badge.svg)](https://github.com/ilapros/rnrfa/actions)
-[![Coverage Status](https://codecov.io/gh/ilapros/rnrfa/master.svg)](https://codecov.io/github/ilapros/rnrfa?branch=master)
+[![Coverage Status](https://codecov.io/github/ilapros/rnrfa/graph/badge.svg)](https://app.codecov.io/github/ilapros/rnrfa?branch=master)
 
 **This is the new page of rnrfa - past versions (and the first version) can be seen at https://github.com/cvitolo/rnrfa**
 
@@ -117,5 +116,5 @@ This package uses a non-public API which is likely to change. Package and functi
 ### Meta
 
 -   Please [report any issues or bugs](https://github.com/ilapros/rnrfa/issues).
--   License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
+-   License: [GPL-3](https://opensource.org/license/gpl-3-0/)
 -   Get citation information for `rnrfa` in R doing `citation(package = 'rnrfa')`
